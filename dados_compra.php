@@ -1,21 +1,26 @@
 <?php
-// /dados_compra.php (VERSÃO FINAL COM FILTRO DE VENDEDORES ATIVOS)
+// /dados_compra.php (VERSÃO CORRIGIDA)
 
 session_start();
 
-if (!isset($_SESSION['vendedor_autenticado']) || $_SESSION['vendedor_autenticado'] !== true) {
+// =================== CORREÇÃO APLICADA AQUI ===================
+// A lógica agora verifica se existe um CLIENTE logado (cliente_id) 
+// OU um VENDEDOR logado (vendedor_autenticado). Se nenhum dos dois existir,
+// aí sim ele redireciona para a página de CPF.
+if (!isset($_SESSION['cliente_id']) && !isset($_SESSION['vendedor_autenticado'])) {
     header('Location: cpf.php');
     exit();
 }
+// =============================================================
 
 require_once 'php/db_config.php';
 
-$nome_cliente = htmlspecialchars($_SESSION['cliente_nome']);
+// Garante que o nome do cliente seja exibido corretamente
+$nome_cliente = isset($_SESSION['cliente_nome']) ? htmlspecialchars($_SESSION['cliente_nome']) : 'Cliente';
 
 $vendedores = [];
 
-// =================== ALTERAÇÃO IMPORTANTE AQUI ===================
-// Adicionamos "AND ativo = TRUE" para buscar apenas os vendedores ativos.
+// Busca apenas os vendedores ativos para preencher o dropdown
 $sql = "SELECT id, nome FROM usuarios WHERE cargo = 2 AND ativo = TRUE ORDER BY nome ASC";
 
 $result = pg_query($link, $sql);
