@@ -1,5 +1,5 @@
 <?php
-// /php/cadastrar_cliente.php (VERSÃO FINAL E CORRIGIDA)
+// /php/cadastrar_cliente.php (VERSÃO FINAL COM REDIRECIONAMENTO CORRETO)
 
 session_start();
 require_once "db_config.php";
