@@ -1,5 +1,5 @@
 <?php
-// /php/cadastrar_cliente.php (VERSÃO FINAL COM REDIRECIONAMENTO CORRETO)
+// /php/cadastrar_cliente.php (VERSÃO FINAL E ATUALIZADA)
 
 session_start();
 require_once "db_config.php";
@@ -10,14 +10,18 @@ $response = ['status' => 'error', 'message' => 'Ocorreu um erro desconhecido.'];
 // O ID do usuário/loja que está cadastrando o cliente, no seu caso sempre 1.
 $usuario_id = 1;
 
-// Pega os dados enviados pelo formulário
-$cpf_da_sessao = $_SESSION['cpf_digitado'] ?? '';
+// =================== CORREÇÃO APLICADA AQUI ===================
+// Pegamos o CPF diretamente do formulário ($_POST) em vez da sessão, que é mais confiável.
+$cpf_do_form = $_POST['cpf'] ?? '';
+// =============================================================
+
+// Pega os outros dados enviados pelo formulário
 $nome = trim($_POST['nome'] ?? '');
 $whatsapp_sujo = trim($_POST['whatsapp'] ?? '');
 $nascimento_br = trim($_POST['nascimento'] ?? '');
 
 // Limpa os dados para evitar problemas de formatação
-$cpf_limpo = preg_replace('/[^0-9]/', '', $cpf_da_sessao);
+$cpf_limpo = preg_replace('/[^0-9]/', '', $cpf_do_form); // Usando a variável do formulário
 $whatsapp_limpo = preg_replace('/[^0-9]/', '', $whatsapp_sujo);
 
 // Validação dos campos
