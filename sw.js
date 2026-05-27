@@ -1,11 +1,13 @@
-const CACHE_NAME = 'sorteio-app-cache-v1';
+const CACHE_NAME = 'sorteio-app-cache-v2';
 const urlsToCache = [
   '/',
   '/index.php',
   '/offline.html',
   '/css/style.css',
   '/images/weagles.jpg',
-  '/favicon.png'
+  '/favicon.jpg',
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 // Evento de Instalação: Salva os arquivos principais no cache

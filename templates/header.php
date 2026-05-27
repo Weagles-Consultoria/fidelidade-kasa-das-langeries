@@ -31,7 +31,8 @@ if (session_status() === PHP_SESSION_NONE) {
     }
     ?>
 
-    <link rel="icon" type="image/png" href="<?php echo version('/favicon.jpg'); ?>">
+    <link rel="icon" type="image/jpeg" href="<?php echo version('/favicon.jpg'); ?>">
+    <link rel="apple-touch-icon" href="<?php echo version('/icon-192.png'); ?>">
     <link rel="manifest" href="<?php echo version('/manifest.json'); ?>">
     <link rel="stylesheet" href="<?php echo version('css/style.css'); ?>">
 
