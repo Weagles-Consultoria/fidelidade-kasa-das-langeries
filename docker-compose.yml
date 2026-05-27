@@ -1,0 +1,25 @@
+services:
+  app:
+    build: . # <--- Isso diz para o Docker ler o seu Dockerfile
+    ports:
+      - "8092:80"
+    environment:
+      - DATABASE_URL=postgres://admin:admin@db:5432/crm_local
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=crm_local
+    ports:
+      - "5492:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
