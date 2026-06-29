@@ -6,5 +6,7 @@ RUN apt-get update && apt-get install -y libpq-dev \
 RUN a2enmod rewrite
 
 COPY . /var/www/html/
+COPY docker/apache/security.conf /etc/apache2/conf-available/security-hardening.conf
 
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html \
+    && a2enconf security-hardening
